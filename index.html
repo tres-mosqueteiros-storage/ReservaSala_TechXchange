@@ -2,423 +2,454 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Registro — Sala Ásia</title>
-    <style>
-        :root {
-            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro — Sala Ásia</title>
+  <style>
+    :root {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
 
-        body {
-            margin: 0;
-            background-color: #f6f8ff;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative
-        }
+    body {
+      margin: 0;
+      background-color: #f6f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        .info {
-            display: flex;
-            justify-content: center;
-            text-align: center;
-            font-size: 12px;
-            color: #555
-        }
+    .info {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      font-size: 12px;
+      color: #555;
+    }
 
-        .bg-left,
-        .bg-right {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            background-repeat: no-repeat;
-            background-size: contain;
-            z-index: 0
-        }
+    .bg-left,
+    .bg-right {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      background-repeat: no-repeat;
+      background-size: contain;
+      z-index: 0;
+    }
 
-        .bg-left {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            width: 180px;
-            background-position: left top;
-            background-size: contain;
-            z-index: 0;
-            background-image: url('Fundo.png');
-            transition: width 0.3s ease, height 0.3s ease
-        }
+    .bg-left {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 180px;
+      background-position: left top;
+      background-size: contain;
+      z-index: 0;
+      background-image: url('Fundo.png');
+      transition: width 0.3s ease, height 0.3s ease;
+    }
 
-        .bg-right {
-            position: fixed;
-            bottom: 20px;
-            right: 0;
-            width: 100px;
-            top: 95%;
-            height: 20px;
-            background-position: right;
-            background-size: contain;
-            z-index: 1;
-            background-image: url('IBM-Fundo.png');
-            transition: width 0.3s ease, height 0.3s ease
-        }
+    .bg-right {
+      position: fixed;
+      bottom: 20px;
+      right: 0;
+      width: 100px;
+      top: 95%;
+      height: 20px;
+      background-position: right;
+      background-size: contain;
+      z-index: 1;
+      background-image: url('IBM-Fundo.png');
+      transition: width 0.3s ease, height 0.3s ease;
+    }
 
-        .wrap {
-            position: relative;
-            z-index: 1;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            padding: 44px;
-            max-width: 560px;
-            width: 90%;
-            margin: 64px auto
-        }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      padding: 44px;
+      max-width: 560px;
+      width: 90%;
+      margin: 64px auto;
+    }
 
-        h1 {
-            margin: 0 0 10px;
-            font-size: 28px
-        }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+    }
 
-        p.desc {
-            margin: 0 0 28px;
-            color: #555
-        }
+    p.desc {
+      margin: 0 0 28px;
+      color: #555;
+    }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            column-gap: 32px;
-            row-gap: 0
-        }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 32px;
+      row-gap: 0;
+    }
 
-        .field {
-            margin-bottom: 22px
-        }
+    .field {
+      margin-bottom: 22px;
+    }
 
-        .field label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 12px
-        }
+    .field label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
 
-        .control {
-            box-sizing: border-box;
-            width: 100%;
-            padding: 14px 12px;
-            border: 1px solid #d0d0d0;
-            border-radius: 12px;
-            font-size: 16px;
-            line-height: 1.4;
-            background: #fafafa
-        }
+    .control {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 14px 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 12px;
+      font-size: 16px;
+      line-height: 1.4;
+      background: #fafafa;
+    }
 
-        .datebox {
-            background: #f6f6f6;
-            border: 1px dashed #d8d8d8;
-            border-radius: 12px;
-            padding: 14px 12px;
-            color: #333
-        }
+    .datebox {
+      background: #f6f6f6;
+      border: 1px dashed #d8d8d8;
+      border-radius: 12px;
+      padding: 14px 12px;
+      color: #333;
+    }
 
-        option[disabled] {
-            color: #888
-        }
+    option[disabled] {
+      color: #888;
+    }
 
-        .warn {
-            background: #fff4e5;
-            color: #8a5a00;
-            padding: 10px 12px;
-            border-radius: 10px;
-            margin-top: 12px;
-            display: none
-        }
+    .warn {
+      background: #fff4e5;
+      color: #8a5a00;
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin-top: 12px;
+      display: none;
+    }
 
-        .ok {
-            background: #e8f5e9;
-            color: #1b5e20;
-            padding: 12px 14px;
-            border-radius: 10px;
-            margin-top: 16px;
-            display: none
-        }
+    .ok {
+      background: #e8f5e9;
+      color: #1b5e20;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-top: 16px;
+      display: none;
+    }
 
-        .err {
-            background: #ffebee;
-            color: #b71c1c;
-            padding: 12px 14px;
-            border-radius: 10px;
-            margin-top: 16px;
-            display: none
-        }
+    .err {
+      background: #ffebee;
+      color: #b71c1c;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-top: 16px;
+      display: none;
+    }
 
-        .btn {
-            margin-top: 6px;
-            padding: 13px 20px;
-            border: 0;
-            border-radius: 999px;
-            font-weight: 800;
-            cursor: pointer;
-            background: #0f62fe;
-            color: #fff
-        }
+    .btn {
+      margin-top: 6px;
+      padding: 13px 20px;
+      border: 0;
+      border-radius: 999px;
+      font-weight: 800;
+      cursor: pointer;
+      background: #0f62fe;
+      color: #fff;
+    }
 
-        footer {
-            margin-top: 26px;
-            color: #666;
-            font-size: 12px;
-            text-align: center
-        }
+    footer {
+      margin-top: 26px;
+      color: #666;
+      font-size: 12px;
+      text-align: center;
+    }
 
-        iframe#sink {
-            display: none;
-            width: 0;
-            height: 0;
-            border: 0
-        }
+    iframe#sink {
+      display: none;
+      width: 0;
+      height: 0;
+      border: 0;
+    }
 
-        @media(max-width:1024px) {
-            body {
-                background-size: 180px auto, 140px auto
-            }
+    /* Loading Spinner */
+    .loading {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 5px solid #f3f3f3; /* Light gray */
+      border-top: 5px solid #0f62fe; /* Blue */
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 2s linear infinite;
+    }
 
-            .bg-right {
-                width: 80px
-            }
+    @keyframes spin {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
 
-            .bg-left {
-                width: 150px
-            }
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
 
-            .wrap {
-                max-width: 600px;
-                padding: 36px
-            }
-        }
+    @media(max-width:1024px) {
+      body {
+        background-size: 180px auto, 140px auto;
+      }
 
-        @media(max-width:768px) {
-            body {
-                background-attachment: scroll, scroll;
-                background-size: 180px auto, 100px auto
-            }
+      .bg-right {
+        width: 80px;
+      }
 
-            .wrap {
-                padding: 24px;
-                width: 90%;
-                max-width: 400px
-            }
+      .bg-left {
+        width: 150px;
+      }
 
-            .bg-right {
-                width: 60px
-            }
+      .wrap {
+        max-width: 600px;
+        padding: 36px;
+      }
+    }
 
-            .bg-left {
-                width: 160px
-            }
+    @media(max-width:768px) {
+      body {
+        background-attachment: scroll, scroll;
+        background-size: 180px auto, 100px auto;
+      }
 
-            h1 {
-                font-size: 22px
-            }
+      .wrap {
+        padding: 24px;
+        width: 90%;
+        max-width: 400px;
+      }
 
-            label {
-                font-size: 14px
-            }
-        }
+      .bg-right {
+        width: 60px;
+      }
 
-        @media(max-width:480px) {
-            body {
-                background-size: 160px auto, 80px auto
-            }
+      .bg-left {
+        width: 160px;
+      }
 
-            .wrap {
-                margin-top: 20px;
-                padding: 20px;
-                width: 85%;
-                border-radius: 12px;
-                background: linear-gradient(to bottom, rgba(255, 255, 255, 0.777) 3%, rgba(255, 255, 255, 1) 97%)
-            }
+      h1 {
+        font-size: 22px;
+      }
 
-            .bg-right {
-                width: 50px;
-                justify-items: end
-            }
+      label {
+        font-size: 14px;
+      }
+    }
 
-            .bg-left {
-                width: 150px
-            }
+    @media(max-width:480px) {
+      body {
+        background-size: 160px auto, 80px auto;
+      }
 
-            h1 {
-                font-size: 18px
-            }
+      .wrap {
+        margin-top: 20px;
+        padding: 20px;
+        width: 85%;
+        border-radius: 12px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.777) 3%, rgba(255, 255, 255, 1) 97%);
+      }
 
-            p.desc {
-                font-size: 12px
-            }
-        }
-    </style>
+      .bg-right {
+        width: 50px;
+        justify-items: end;
+      }
+
+      .bg-left {
+        width: 150px;
+      }
+
+      h1 {
+        font-size: 18px;
+      }
+
+      p.desc {
+        font-size: 12px;
+      }
+    }
+  </style>
 
 </head>
 
 <body>
-    <div class="bg-left"></div>
-    <div class="bg-right"></div>
-    <div class="wrap">
-        <h1 id="title">Registro — Sala Ásia</h1>
-        <p class="desc" id="desc">Escolha a data desejada e preencha os demais campos.</p>
+  <div class="bg-left"></div>
+  <div class="bg-right"></div>
+  <div class="wrap">
+    <h1 id="title">Registro — Sala Ásia</h1>
+    <p class="desc" id="desc">Escolha a data desejada e preencha os demais campos.</p>
 
-        <iframe id="sink" name="sink"></iframe>
+    <iframe id="sink" name="sink"></iframe>
 
-        <form id="form"
-            action="https://script.google.com/macros/s/AKfycby6e1w6SekWbPAQsUGpxZv2puFg48vPULT2vQUmmT4JqnrZ_crrhnc3kRI8e5j78FKjZA/exec"
-            method="POST" target="sink">
-            <div class="grid-2">
-                <div class="field">
-                    <label>Sala *</label>
-                    <input class="control" value="Sala Ásia" disabled />
-                    <input type="hidden" name="sala" id="sala_h" value="Sala Ásia" />
-                </div>
-                <div class="field">
-                    <label for="empresa">Empresa *</label>
-                    <input class="control" id="empresa" placeholder="Ex.: IBM" required />
-                </div>
-            </div>
+    <form id="form" action="https://script.google.com/macros/s/AKfycby6e1w6SekWbPAQsUGpxZv2puFg48vPULT2vQUmmT4JqnrZ_crrhnc3kRI8e5j78FKjZA/exec"
+      method="POST" target="sink">
+      <div class="grid-2">
+        <div class="field">
+          <label>Sala *</label>
+          <input class="control" value="Sala Ásia" disabled />
+          <input type="hidden" name="sala" id="sala_h" value="Sala Ásia" />
+        </div>
+        <div class="field">
+          <label for="empresa">Empresa *</label>
+          <input class="control" id="empresa" placeholder="Ex.: IBM" required />
+        </div>
+      </div>
 
-            <div class="field">
-                <label for="responsavel">Responsável *</label>
-                <input class="control" id="responsavel" placeholder="Nome" required />
-            </div>
+      <div class="field">
+        <label for="responsavel">Responsável *</label>
+        <input class="control" id="responsavel" placeholder="Nome" required />
+      </div>
 
-            <!-- ✅ Dropdown de datas -->
-            <div class="field">
-                <label for="data_select">Data *</label>
-                <select class="control" id="data_select" required>
-                    <option value="2025-11-12">12/11/2025</option>
-                    <option value="2025-11-13">13/11/2025</option>
-                </select>
-                <input type="hidden" id="data" value="2025-11-12" />
-            </div>
+      <div class="field">
+        <label for="data_select">Data *</label>
+        <select class="control" id="data_select" required>
+          <option value="2025-11-12">12/11/2025</option>
+          <option value="2025-11-13">13/11/2025</option>
+        </select>
+        <input type="hidden" id="data" value="2025-11-12" />
+      </div>
 
-            <div class="field">
-                <label for="slot">Horário *</label>
-                <select class="control" id="slot" required></select>
-                <div id="ocupadosMsg" class="warn"></div>
-            </div>
+      <div class="field">
+        <label for="slot">Horário *</label>
+        <select class="control" id="slot" required></select>
+        <div id="ocupadosMsg" class="warn"></div>
+      </div>
 
-            <div class="field">
-                <label for="observacoes">Observações</label>
-                <textarea class="control" id="observacoes" rows="4" placeholder="Opcional"></textarea>
-            </div>
+      <div class="field">
+        <label for="observacoes">Observações</label>
+        <textarea class="control" id="observacoes" rows="4" placeholder="Opcional"></textarea>
+      </div>
 
-            <input type="hidden" name="empresa" id="empresa_h" />
-            <input type="hidden" name="responsavel" id="responsavel_h" />
-            <input type="hidden" name="inicio" id="inicio_h" />
-            <input type="hidden" name="fim" id="fim_h" />
-            <input type="hidden" name="observacoes" id="observacoes_h" />
+      <input type="hidden" name="empresa" id="empresa_h" />
+      <input type="hidden" name="responsavel" id="responsavel_h" />
+      <input type="hidden" name="inicio" id="inicio_h" />
+      <input type="hidden" name="fim" id="fim_h" />
+      <input type="hidden" name="observacoes" id="observacoes_h" />
 
-            <button class="btn" id="btn" type="submit">Salvar registro</button>
-            <p class="info">Aguarde até aparecer a mensagem "Registro salvo com sucesso"</p>
-            <div id="ok" class="ok">Registro salvo com sucesso!</div>
-            <div id="err" class="err"></div>
-        </form>
-        <footer>Storage Brazil, an IBM TechXchange Workshop</footer>
-    </div>
+      <button class="btn" id="btn" type="submit">Salvar registro</button>
+      <div id="loading" class="loading"></div> <!-- Loading Spinner -->
+      <p class="info">Aguarde até aparecer a mensagem "Registro salvo com sucesso"</p>
+      <div id="ok" class="ok">Registro salvo com sucesso!</div>
+      <div id="err" class="err"></div>
+    </form>
+    <footer>Storage Brazil, an IBM TechXchange Workshop</footer>
+  </div>
 
-    <script>
-        const FIXED_ROOM = 'Sala Ásia';
+  <script>
+    const FIXED_ROOM = 'Sala Ásia';
 
-        // Função para listar todos os horários disponíveis
-        function slotsList() {
-            const slots = [], pad = n => String(n).padStart(2, '0');
-            for (let h = 10; h <= 16; h++) {
-                for (let m of [0, 30]) {
-                    const sh = pad(h), sm = pad(m);
-                    let eh = h, em = m + 30;
-                    if (em === 60) { eh += 1; em = 0; }
-                    slots.push(sh + ':' + sm + ' - ' + pad(eh) + ':' + pad(em));
-                }
-            }
-            return slots;
+    // Função para listar todos os horários disponíveis
+    function slotsList() {
+      const slots = [], pad = n => String(n).padStart(2, '0');
+      for (let h = 10; h <= 16; h++) {
+        for (let m of [0, 30]) {
+          const sh = pad(h), sm = pad(m);
+          let eh = h, em = m + 30;
+          if (em === 60) { eh += 1; em = 0; }
+          slots.push(sh + ':' + sm + ' - ' + pad(eh) + ':' + pad(em));
         }
+      }
+      return slots;
+    }
 
-        // Função para preencher os horários disponíveis
-        function fillSlots(occupied) {
-            const sel = document.getElementById('slot'), all = slotsList();
-            sel.innerHTML = all.map(s =>
-                `<option ${(occupied || []).includes(s) ? 'disabled ' : ''}value="${s}">${s}${(occupied || []).includes(s) ? ' (ocupado)' : ''}</option>`
-            ).join('');
-            const msg = document.getElementById('ocupadosMsg');
-            if (occupied && occupied.length) {
-                msg.textContent = 'Indisponíveis: ' + occupied.join(', ');
-                msg.style.display = 'block';
-            } else {
-                msg.style.display = 'none';
-            }
+    // Função para preencher os horários disponíveis
+    function fillSlots(occupied) {
+      const sel = document.getElementById('slot'), all = slotsList();
+      sel.innerHTML = all.map(s =>
+        `<option ${(occupied || []).includes(s) ? 'disabled ' : ''}value="${s}">${s}${(occupied || []).includes(s) ? ' (ocupado)' : ''}</option>`
+      ).join('');
+      const msg = document.getElementById('ocupadosMsg');
+      if (occupied && occupied.length) {
+        msg.textContent = 'Indisponíveis: ' + occupied.join(', ');
+        msg.style.display = 'block';
+      } else {
+        msg.style.display = 'none';
+      }
+    }
+
+    // Função para buscar os horários ocupados via JSONP
+    function fetchOccupiedJSONP(execBaseUrl, sala, dataISO, cb) {
+      const cbName = 'jsonp_cb_' + Math.random().toString(36).slice(2);
+      window[cbName] = p => { try { cb(p); } finally { delete window[cbName]; s.remove(); } };
+      const url = execBaseUrl + '?op=ocupados&sala=' + encodeURIComponent(sala) +
+        '&data=' + encodeURIComponent(dataISO) + '&callback=' + cbName;
+      const s = document.createElement('script');
+      s.src = url;
+      s.onerror = () => cb({ ok: false });
+      document.body.appendChild(s);
+    }
+
+    // Função para pegar a URL base da API
+    function getExecBase() {
+      return document.getElementById('form').getAttribute('action').split('?')[0];
+    }
+
+    // Função que atualiza os slots disponíveis com base na data selecionada
+    function atualizarSlots() {
+      const dataISO = document.getElementById('data_select').value;
+      document.getElementById('data').value = dataISO;
+      fillSlots([]);
+      fetchOccupiedJSONP(getExecBase(), FIXED_ROOM, dataISO, res => {
+        if (res && res.ok) fillSlots(res.occupied || []);
+      });
+    }
+
+    (function init() {
+      document.getElementById('sala_h').value = FIXED_ROOM;
+      atualizarSlots();
+      document.getElementById('data_select').addEventListener('change', atualizarSlots);
+    })();
+
+    document.getElementById('sink').addEventListener('load', function () {
+      const dataISO = document.getElementById('data').value;
+      const chosen = document.getElementById('slot').value;
+      fetchOccupiedJSONP(getExecBase(), FIXED_ROOM, dataISO, res => {
+        if (res && res.ok && Array.isArray(res.occupied) && res.occupied.includes(chosen)) {
+          document.getElementById('ok').style.display = 'block';
+          document.getElementById('err').style.display = 'none';
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('form').reset();
+          atualizarSlots();
+        } else {
+          document.getElementById('ok').style.display = 'none';
+          document.getElementById('err').textContent = 'Não foi possível registrar: horário indisponível.';
+          document.getElementById('err').style.display = 'block';
+          document.getElementById('loading').style.display = 'none';
+          atualizarSlots();
         }
+      });
+    });
 
-        // Função para buscar os horários ocupados via JSONP
-        function fetchOccupiedJSONP(execBaseUrl, sala, dataISO, cb) {
-            const cbName = 'jsonp_cb_' + Math.random().toString(36).slice(2);
-            window[cbName] = p => { try { cb(p); } finally { delete window[cbName]; s.remove(); } };
-            const url = execBaseUrl + '?op=ocupados&sala=' + encodeURIComponent(sala) +
-                '&data=' + encodeURIComponent(dataISO) + '&callback=' + cbName;
-            const s = document.createElement('script');
-            s.src = url;
-            s.onerror = () => cb({ ok: false });
-            document.body.appendChild(s);
-        }
+    document.getElementById('form').addEventListener('submit', function () {
+      const dataISO = document.getElementById('data').value;
+      const [ini, fim] = document.getElementById('slot').value.split(' - ');
+      document.getElementById('empresa_h').value = document.getElementById('empresa').value;
+      document.getElementById('responsavel_h').value = document.getElementById('responsavel').value;
+      document.getElementById('inicio_h').value = dataISO + 'T' + ini;
+      document.getElementById('fim_h').value = dataISO + 'T' + fim;
+      document.getElementById('observacoes_h').value = document.getElementById('observacoes').value;
 
-        // Função para pegar a URL base da API
-        function getExecBase() {
-            return document.getElementById('form').getAttribute('action').split('?')[0];
-        }
-
-        // Função que atualiza os slots disponíveis com base na data selecionada
-        function atualizarSlots() {
-            const dataISO = document.getElementById('data_select').value;
-            document.getElementById('data').value = dataISO;
-            fillSlots([]);
-            fetchOccupiedJSONP(getExecBase(), FIXED_ROOM, dataISO, res => {
-                if (res && res.ok) fillSlots(res.occupied || []);
-            });
-        }
-
-        (function init() {
-            document.getElementById('sala_h').value = FIXED_ROOM;
-            atualizarSlots();
-            document.getElementById('data_select').addEventListener('change', atualizarSlots);
-        })();
-
-        document.getElementById('sink').addEventListener('load', function () {
-            const dataISO = document.getElementById('data').value;
-            const chosen = document.getElementById('slot').value;
-            fetchOccupiedJSONP(getExecBase(), FIXED_ROOM, dataISO, res => {
-                if (res && res.ok && Array.isArray(res.occupied) && res.occupied.includes(chosen)) {
-                    document.getElementById('ok').style.display = 'block';
-                    document.getElementById('err').style.display = 'none';
-                    document.getElementById('form').reset();
-                    atualizarSlots();
-                } else {
-                    document.getElementById('ok').style.display = 'none';
-                    document.getElementById('err').textContent = 'Não foi possível registrar: horário indisponível.';
-                    document.getElementById('err').style.display = 'block';
-                    atualizarSlots();
-                }
-            });
-        });
-
-        document.getElementById('form').addEventListener('submit', function () {
-            const dataISO = document.getElementById('data').value;
-            const [ini, fim] = document.getElementById('slot').value.split(' - ');
-            document.getElementById('empresa_h').value = document.getElementById('empresa').value;
-            document.getElementById('responsavel_h').value = document.getElementById('responsavel').value;
-            document.getElementById('inicio_h').value = dataISO + 'T' + ini;
-            document.getElementById('fim_h').value = dataISO + 'T' + fim;
-            document.getElementById('observacoes_h').value = document.getElementById('observacoes').value;
-        });
-    </script>
+      // Show loading spinner and hide messages while submitting
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('ok').style.display = 'none';
+      document.getElementById('err').style.display = 'none';
+    });
+  </script>
 </body>
 
 </html>
