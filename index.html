@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro — Sala Ásia (12/10/2025)</title>
+  <style>
+    :root { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+    body { margin: 0; background: #0f62fe0d; }
+    .wrap { max-width: 760px; margin: 48px auto; background: #fff; padding: 44px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+    h1 { margin: 0 0 10px; font-size: 28px; }
+    p.desc { margin: 0 0 28px; color: #555; }
+
+    /* >>> separação visível entre Sala | Empresa */
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 32px;
+    }
+
+    .field{ margin-bottom:22px; }
+    .field label{ display:block; font-weight:700; margin-bottom:12px; }
+    .control{
+      box-sizing: border-box;
+      width:100%;
+      padding:14px 12px;
+      border:1px solid #d0d0d0;
+      border-radius:12px;
+      font-size:16px;
+      line-height:1.4;
+      background:#fafafa;
+    }
+    .datebox{ background:#f6f6f6; border:1px dashed #d8d8d8; border-radius:12px; padding:14px 12px; color:#333; }
+    option[disabled]{ color:#888; }
+
+    .warn{ background:#fff4e5; color:#8a5a00; padding:10px 12px; border-radius:10px; margin-top:12px; display:none; }
+    .ok{ background:#e8f5e9; color:#1b5e20; padding:12px 14px; border-radius:10px; margin-top:16px; display:none; }
+    .err{ background:#ffebee; color:#b71c1c; padding:12px 14px; border-radius:10px; margin-top:16px; display:none; }
+    .btn{ margin-top:6px; padding:13px 20px; border:0; border-radius:999px; font-weight:800; cursor:pointer; background:#0f62fe; color:#fff; }
+    footer{ margin-top:26px; color:#666; font-size:12px; text-align:center; }
+    iframe#sink{ display:none; width:0; height:0; border:0; }
+
+    @media (max-width:720px){
+      .grid-2{ grid-template-columns:1fr; column-gap:0; }
+      .wrap{ padding:28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 id="title">Registro — Sala Ásia</h1>
+    <p class="desc" id="desc">Data fixa: <strong>12/10/2025</strong>. Preencha os demais campos.</p>
+
+    <!-- IFRAME oculto para receber o POST (evita CORS) -->
+    <iframe id="sink" name="sink"></iframe>
+
+    <!-- Troque o action se a URL /exec mudar após nova implantação -->
+    <form id="form" action="https://script.google.com/macros/s/AKfycby6e1w6SekWbPAQsUGpxZv2puFg48vPULT2vQUmmT4JqnrZ_crrhnc3kRI8e5j78FKjZA/exec" method="POST" target="sink">
+      <div class="grid-2">
+        <div class="field">
+          <label>Sala *</label>
+          <input class="control" value="Sala Ásia" disabled />
+          <input type="hidden" name="sala" id="sala_h" value="Sala Ásia" />
+        </div>
+        <div class="field">
+          <label for="empresa">Empresa *</label>
+          <input class="control" id="empresa" placeholder="Ex.: ACME Ltda" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="responsavel">Responsável *</label>
+        <input class="control" id="responsavel" placeholder="Nome" required />
+      </div>
+
+      <div class="field">
+        <label>Data *</label>
+        <div class="datebox" id="date_label">12/10/2025</div>
+        <input type="hidden" id="data" value="2025-10-12" />
+      </div>
+
+      <div class="field">
+        <label for="slot">Horário *</label>
+        <select class="control" id="slot" required></select>
+        <div id="ocupadosMsg" class="warn"></div>
+      </div>
+
+      <div class="field">
+        <label for="observacoes">Observações</label>
+        <textarea class="control" id="observacoes" rows="4" placeholder="Opcional"></textarea>
+      </div>
+
+      <!-- payload escondido para o Apps Script -->
+      <input type="hidden" name="empresa" id="empresa_h" />
+      <input type="hidden" name="responsavel" id="responsavel_h" />
+      <input type="hidden" name="inicio" id="inicio_h" />
+      <input type="hidden" name="fim" id="fim_h" />
+      <!-- Adicionando o campo oculto para as observações -->
+      <input type="hidden" name="observacoes" id="observacoes_h" />
+
+      <button class="btn" id="btn" type="submit">Salvar registro</button>
+      <div id="ok" class="ok">Registro salvo com sucesso!</div>
+      <div id="err" class="err"></div>
+    </form>
+    <footer>Simples, limpo e responsivo</footer>
+  </div>
+
+  <script>
+    /* CONFIG FIXA */
+    const FIXED_ROOM     = 'Sala Ásia';
+    const FIXED_DATE_ISO = '2025-10-12';
+    const FIXED_DATE_BR  = '12/10/2025';
+
+    function slotsList(){
+      const slots = [], pad = n => String(n).padStart(2,'0');
+      for (let h=10; h<=16; h++){ for (let m of [0,30]){
+        const sh=pad(h), sm=pad(m); let eh=h, em=m+30; if(em===60){eh+=1; em=0;}
+        slots.push(sh+':'+sm+' - '+pad(eh)+':'+pad(em));
+      }} return slots;
+    }
+
+    function fillSlots(occupied){
+      const sel=document.getElementById('slot'), all=slotsList();
+      sel.innerHTML = all.map(s=>'<option '+((occupied||[]).includes(s)?'disabled ':'')+'value="'+s+'">'+s+((occupied||[]).includes(s)?' (ocupado)':'')+'</option>').join('');
+      const msg=document.getElementById('ocupadosMsg');
+      if(occupied && occupied.length){ msg.textContent='Indisponíveis: '+occupied.join(', '); msg.style.display='block'; }
+      else { msg.style.display='none'; }
+    }
+
+    function fetchOccupiedJSONP(execBaseUrl, sala, dataISO, cb){
+      const cbName='jsonp_cb_'+Math.random().toString(36).slice(2);
+      window[cbName]=p=>{ try{cb(p);}finally{ delete window[cbName]; s.remove(); } };
+      const url=execBaseUrl+'?op=ocupados&sala='+encodeURIComponent(sala)+'&data='+encodeURIComponent(dataISO)+'&callback='+cbName;
+      const s=document.createElement('script'); s.src=url; s.onerror=()=>cb({ok:false}); document.body.appendChild(s);
+    }
+    function getExecBase(){ return document.getElementById('form').getAttribute('action').split('?')[0]; }
+
+    (function init(){
+      document.getElementById('title').textContent='Registro — '+FIXED_ROOM;
+      document.getElementById('desc').innerHTML='Data fixa: <strong>'+FIXED_DATE_BR+'</strong>. Preencha os demais campos.';
+      document.getElementById('date_label').textContent=FIXED_DATE_BR;
+      document.getElementById('data').value=FIXED_DATE_ISO;
+      document.getElementById('sala_h').value=FIXED_ROOM;
+      fillSlots([]);
+      fetchOccupiedJSONP(getExecBase(), FIXED_ROOM, FIXED_DATE_ISO, res=>{ if(res&&res.ok) fillSlots(res.occupied||[]); });
+    })();
+
+    document.getElementById('sink').addEventListener('load', function(){
+      const chosen=document.getElementById('slot').value;
+      fetchOccupiedJSONP(getExecBase(), FIXED_ROOM, FIXED_DATE_ISO, res=>{
+        if(res&&res.ok&&Array.isArray(res.occupied)&&res.occupied.includes(chosen)){
+          document.getElementById('ok').style.display='block';
+          document.getElementById('err').style.display='none';
+          document.getElementById('form').reset();
+          document.getElementById('date_label').textContent=FIXED_DATE_BR;
+          document.getElementById('data').value=FIXED_DATE_ISO;
+          document.getElementById('sala_h').value=FIXED_ROOM;
+          fetchOccupiedJSONP(getExecBase(), FIXED_ROOM, FIXED_DATE_ISO, r2=>{ if(r2&&r2.ok) fillSlots(r2.occupied||[]); });
+        } else {
+          document.getElementById('ok').style.display='none';
+          document.getElementById('err').textContent='Não foi possível registrar: horário indisponível.';
+          document.getElementById('err').style.display='block';
+          fetchOccupiedJSONP(getExecBase(), FIXED_ROOM, FIXED_DATE_ISO, r2=>{ if(r2&&r2.ok) fillSlots(r2.occupied||[]); });
+        }
+      });
+    });
+
+    document.getElementById('form').addEventListener('submit', function(){
+      const dataISO=document.getElementById('data').value;
+      const [ini,fim]=document.getElementById('slot').value.split(' - ');
+      document.getElementById('empresa_h').value     = document.getElementById('empresa').value;
+      document.getElementById('responsavel_h').value = document.getElementById('responsavel').value;
+      document.getElementById('inicio_h').value      = dataISO+'T'+ini;
+      document.getElementById('fim_h').value         = dataISO+'T'+fim;
+      
+      // Enviando o valor das observações para o campo oculto
+      document.getElementById('observacoes_h').value = document.getElementById('observacoes').value;
+    });
+  </script>
+</body>
+</html>
